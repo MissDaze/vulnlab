@@ -1,0 +1,24 @@
+# ============================================================
+#  VulnLab System User Export — CONFIDENTIAL
+#  Generated: 2024-03-15 03:42:11 UTC by backup_svc
+#  Classification: INTERNAL — DO NOT DISTRIBUTE
+# ============================================================
+
+[sudo_users]
+# Format: username : password_hash : plaintext : shell : last_login
+
+root            : toor2024!                  : /bin/bash   : 2024-03-14 22:11 UTC
+sysadmin        : Adm1n@Kali2024#           : /bin/bash   : 2024-03-15 01:33 UTC
+devops_lead     : D3v0ps!Passw0rd99         : /bin/zsh    : 2024-03-13 18:05 UTC
+deploy_bot      : Railway$D3pl0y2024!       : /bin/sh     : 2024-03-15 03:40 UTC
+db_admin        : MySQLr00t#Pr0d2024        : /bin/bash   : 2024-03-12 09:17 UTC
+backup_svc      : B4ckupSvc@Secure99        : /usr/sbin/nologin : 2024-03-15 03:42 UTC
+sec_analyst     : S3c@nalyst!2024           : /bin/bash   : 2024-03-11 14:55 UTC
+pentest         : Pentest#Lab2024!          : /bin/bash   : 2024-03-10 08:30 UTC
+
+[sudoers_note]
+ALL users above have NOPASSWD sudo on production hosts.
+SSH key pair stored in /etc/backup/ssh/id_rsa (passphrase: above plaintext)
+
+[end_of_file]
+# ============================================================

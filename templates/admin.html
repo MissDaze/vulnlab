@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head><title>VulnLab — Admin</title>
+<style>
+body{font-family:monospace;background:#0d1117;color:#c9d1d9;margin:0}
+nav{background:#161b22;padding:12px 24px;display:flex;gap:20px;border-bottom:1px solid #30363d}
+nav a{color:#58a6ff;text-decoration:none}
+.container{max-width:900px;margin:40px auto;padding:0 20px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:20px;margin-bottom:20px}
+table{width:100%;border-collapse:collapse}
+td,th{padding:8px 12px;border:1px solid #30363d;text-align:left;font-size:13px}
+th{background:#1c2128;color:#8b949e}
+h2,h3{color:#f0f6fc}
+.warn{color:#d29922}
+</style></head>
+<body>
+<nav>
+  <strong style="color:#f0f6fc">VulnLab</strong>
+  <a href="/">Home</a><a href="/dashboard">Dashboard</a>
+  <a href="/admin">Admin</a><a href="/logout">Logout</a>
+</nav>
+<div class="container">
+  <h2>⚙ Admin Panel <span class="warn">[INTERNAL]</span></h2>
+
+  <div class="card">
+    <h3>Application Config</h3>
+    <!-- VULN: exposes all config including prod DB password -->
+    <table>
+      <tr><th>Key</th><th>Value</th></tr>
+      {% for k,v in cfg %}
+      <tr><td>{{k}}</td><td>{{v}}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>All Users (including password hashes)</h3>
+    <table>
+      <tr><th>ID</th><th>Username</th><th>Password (MD5)</th><th>Role</th><th>Notes</th></tr>
+      {% for u in users %}
+      <tr><td>{{u[0]}}</td><td>{{u[1]}}</td><td style="color:#f85149">{{u[2]}}</td><td>{{u[3]}}</td><td>{{u[4]}}</td></tr>
+      {% endfor %}
+    </table>
+    <p style="color:#8b949e;font-size:12px;margin-top:8px">Note: passwords are MD5 hashed. Use john/hashcat to crack.</p>
+  </div>
+</div>
+</body>
+</html>

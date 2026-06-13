@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head><title>VulnLab — Dashboard</title>
+<style>
+body{font-family:monospace;background:#0d1117;color:#c9d1d9;margin:0}
+nav{background:#161b22;padding:12px 24px;display:flex;gap:20px;border-bottom:1px solid #30363d}
+nav a{color:#58a6ff;text-decoration:none}
+.container{max-width:900px;margin:40px auto;padding:0 20px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:20px;margin-bottom:20px}
+h2{color:#f0f6fc}
+table{width:100%;border-collapse:collapse}
+td,th{padding:8px 12px;border:1px solid #30363d;text-align:left}
+th{background:#1c2128;color:#8b949e}
+.hint{background:#1c2128;border-left:3px solid #d29922;padding:12px;margin-top:20px;font-size:13px;color:#d29922}
+</style></head>
+<body>
+<nav>
+  <strong style="color:#f0f6fc">VulnLab</strong>
+  <a href="/">Home</a><a href="/search">Search</a><a href="/dashboard">Dashboard</a>
+  <a href="/ping">Ping</a><a href="/upload">Upload</a>
+  {% if role == "admin" %}<a href="/admin">Admin</a>{% endif %}
+  <a href="/logout">Logout ({{user}})</a>
+</nav>
+<div class="container">
+  <h2>Welcome, {{user}} <span style="color:#8b949e;font-size:14px">[{{role}}]</span></h2>
+
+  <div class="card">
+    <h3 style="margin-top:0;color:#58a6ff">System Users</h3>
+    <table>
+      <tr><th>ID</th><th>Username</th><th>Role</th></tr>
+      {% for u in users %}
+      <tr><td>{{u[0]}}</td><td>{{u[1]}}</td><td>{{u[2]}}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0;color:#58a6ff">Quick Links</h3>
+    <p><a href="/api/users?id=1">GET /api/users?id=1</a> — User lookup API</p>
+    <p><a href="/search">Search posts</a></p>
+    <p><a href="/upload">File upload</a></p>
+    <p><a href="/ping">Network diagnostic (ping)</a></p>
+  </div>
+
+  <div class="hint">
+    📋 Sysadmin note: {{hint}}
+  </div>
+</div>
+</body>
+</html>

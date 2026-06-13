@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VulnLab v1.0 — Internal Portal</title>
+  <meta name="generator" content="VulnLab/1.0.4">
+  <style>
+    body{font-family:monospace;background:#0d1117;color:#c9d1d9;margin:0;padding:0}
+    nav{background:#161b22;padding:12px 24px;display:flex;align-items:center;gap:20px;border-bottom:1px solid #30363d}
+    nav a{color:#58a6ff;text-decoration:none}
+    .container{max-width:900px;margin:40px auto;padding:0 20px}
+    .post{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;margin-bottom:16px}
+    .post h3{color:#f0f6fc;margin:0 0 8px}
+    .post .meta{color:#8b949e;font-size:12px;margin-bottom:8px}
+    .banner{background:#1c2128;border:1px solid #388bfd;border-radius:6px;padding:12px 16px;margin-bottom:24px;color:#79c0ff}
+    footer{text-align:center;color:#484f58;padding:40px;font-size:12px}
+  </style>
+</head>
+<body>
+<nav>
+  <strong style="color:#f0f6fc">VulnLab</strong>
+  <a href="/">Home</a>
+  <a href="/search">Search</a>
+  {% if user %}<a href="/dashboard">Dashboard</a>
+  <a href="/ping">Ping</a>
+  <a href="/upload">Upload</a>
+  <a href="/logout">Logout ({{user}})</a>
+  {% else %}<a href="/login">Login</a>{% endif %}
+</nav>
+<div class="container">
+  <div class="banner">⚠ VulnLab Internal Portal — Authorised users only. Version 1.0.4-debug</div>
+  {% for p in posts %}
+  <div class="post">
+    <h3>{{p[1]}}</h3>
+    <div class="meta">Posted by {{p[3]}}</div>
+    <p>{{p[2]}}</p>
+  </div>
+  {% endfor %}
+</div>
+<footer>VulnLab v1.0.4 | Werkzeug/3.0 | Python/3.11 | SQLite/3.39</footer>
+<!-- TODO: remove debug endpoints before prod deployment -->
+<!-- TODO: restrict /api/internal to VPN only -->
+</body>
+</html>

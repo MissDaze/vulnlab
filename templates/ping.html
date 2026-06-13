@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>VulnLab — Ping</title>
+<style>
+body{font-family:monospace;background:#0d1117;color:#c9d1d9;margin:0}
+nav{background:#161b22;padding:12px 24px;display:flex;gap:20px;border-bottom:1px solid #30363d}
+nav a{color:#58a6ff;text-decoration:none}
+.container{max-width:900px;margin:40px auto;padding:0 20px}
+input[type=text]{width:60%;padding:8px;background:#161b22;border:1px solid #30363d;border-radius:4px;color:#c9d1d9}
+button{padding:8px 20px;background:#238636;border:none;border-radius:4px;color:#fff;cursor:pointer}
+pre{background:#161b22;border:1px solid #30363d;padding:16px;border-radius:6px;overflow-x:auto;color:#3fb950}
+</style></head>
+<body>
+<nav>
+  <strong style="color:#f0f6fc">VulnLab</strong>
+  <a href="/">Home</a><a href="/dashboard">Dashboard</a><a href="/logout">Logout</a>
+</nav>
+<div class="container">
+  <h2 style="color:#f0f6fc">Network Diagnostic — Ping</h2>
+  <form method="POST">
+    <input type="text" name="host" value="" placeholder="hostname or IP">
+    <button type="submit">Ping</button>
+  </form>
+  {% if output %}<pre>{{output}}</pre>{% endif %}
+</div>
+</body>
+</html>

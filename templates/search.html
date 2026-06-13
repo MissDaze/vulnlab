@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head><title>VulnLab — Search</title>
+<style>
+body{font-family:monospace;background:#0d1117;color:#c9d1d9;margin:0}
+nav{background:#161b22;padding:12px 24px;display:flex;gap:20px;border-bottom:1px solid #30363d}
+nav a{color:#58a6ff;text-decoration:none}
+.container{max-width:900px;margin:40px auto;padding:0 20px}
+input[type=text]{width:70%;padding:8px;background:#161b22;border:1px solid #30363d;border-radius:4px;color:#c9d1d9}
+button{padding:8px 20px;background:#238636;border:none;border-radius:4px;color:#fff;cursor:pointer}
+.result{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;margin-top:12px}
+.err{color:#f85149;margin-top:12px}
+</style></head>
+<body>
+<nav>
+  <strong style="color:#f0f6fc">VulnLab</strong>
+  <a href="/">Home</a><a href="/search">Search</a>
+  {% if user %}<a href="/dashboard">Dashboard</a><a href="/logout">Logout</a>
+  {% else %}<a href="/login">Login</a>{% endif %}
+</nav>
+<div class="container">
+  <h2 style="color:#f0f6fc">Search Posts</h2>
+  <form method="GET">
+    <input type="text" name="q" value="{{q}}" placeholder="Search...">
+    <button type="submit">Search</button>
+  </form>
+  {% if note %}<div class="err">{{note}}</div>{% endif %}
+  <!-- VULN: q is rendered unescaped to support "highlighting" -->
+  {% if q %}<p style="color:#8b949e">Results for: <span id="qt"></span>
+  <script>document.getElementById('qt').innerHTML = "{{q|safe}}";</script></p>{% endif %}
+  {% for r in results %}
+  <div class="result">
+    <strong>{{r[0]}}</strong><br>
+    <span style="color:#8b949e">{{r[2]}}</span><br>
+    {{r[1]}}
+  </div>
+  {% endfor %}
+  {% if q and not results and not note %}<p style="color:#8b949e">No results found.</p>{% endif %}
+</div>
+</body>
+</html>
